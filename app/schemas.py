@@ -30,6 +30,9 @@ class ViewLogOut(BaseModel):
     viewer_ip: str
 
 class AnalyticsOut(BaseModel):
+    media_id: int
+    media_filename: str
     total_views: int
-    unique_ips: int
-    views_per_day: Dict[str, int]
+    unique_viewers: int
+    recent_views_7days: int
+    upload_date: datetime
