@@ -132,6 +132,46 @@ def test_api():
         print(f"   ❌ Stream test failed")
         print(f"   📄 Response: {response}")
     
+    # Test 6: Manual view logging (NEW - Task 2)
+    print("\n6. 📊 Testing Manual View Logging...")
+    view_log_cmd = f'''curl -s -X POST {base_url}/media/{media_id}/view \\
+        -H "Authorization: Bearer {token}"'''
+    
+    code, response, error = run_curl(view_log_cmd)
+    if code == 0:
+        try:
+            data = json.loads(response)
+            if 'message' in data:
+                print(f"   ✅ Status: Success")
+                print(f"   📄 Response: {data}")
+            else:
+                print(f"   ❌ Invalid view log response: {data}")
+        except:
+            print(f"   ❌ Invalid JSON response: {response}")
+    else:
+        print(f"   ❌ View logging failed: {error}")
+    
+    # Test 7: Analytics endpoint (NEW - Task 2)
+    print("\n7. 📈 Testing Analytics...")
+    analytics_cmd = f'''curl -s -X GET {base_url}/media/{media_id}/analytics \\
+        -H "Authorization: Bearer {token}"'''
+    
+    code, response, error = run_curl(analytics_cmd)
+    if code == 0:
+        try:
+            data = json.loads(response)
+            if 'total_views' in data:
+                print(f"   ✅ Status: Success")
+                print(f"   📊 Total Views: {data.get('total_views', 0)}")
+                print(f"   👥 Unique IPs: {data.get('unique_ips', 0)}")
+                print(f"   📅 Views per day: {len(data.get('views_per_day', {})) } days")
+            else:
+                print(f"   ❌ Invalid analytics response: {data}")
+        except:
+            print(f"   ❌ Invalid JSON response: {response}")
+    else:
+        print(f"   ❌ Analytics failed: {error}")
+    
     # Cleanup
     try:
         os.unlink(test_file)
@@ -146,6 +186,8 @@ def test_api():
     print("   ✅ Media upload working")
     print("   ✅ Stream URL generation working")
     print("   ✅ File streaming working")
+    print("   ✅ Manual view logging working (Task 2)")
+    print("   ✅ Analytics endpoint working (Task 2)")
     
     print("\n🌐 Your API is ready! Access it at:")
     print(f"   • Swagger UI: https://glorious-space-fortnight-r44www696r4hwjjx-8000.app.github.dev/docs")

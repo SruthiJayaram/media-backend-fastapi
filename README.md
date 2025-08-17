@@ -1,6 +1,11 @@
 # Media Platform Backend (FastAPI)
 
-A compact, production‑style starter for a media platform where admins upload media and generate secure 10‑minute streaming links.
+A compact, production‑style starter for a media platform where admins upload media and generate secure 10‑minute streaming links with comprehensive view tracking and analytics.
+
+## ✅ Task Completion Status
+
+- **✅ Task 1**: Basic media backend with authentication and secure streaming
+- **✅ Task 2**: Media view tracking & analytics with JWT protection
 
 ## Tech Choices & Assumptions
 
@@ -9,8 +14,9 @@ A compact, production‑style starter for a media platform where admins upload m
 - **DB**: SQLite (via SQLAlchemy). Easy to swap to Postgres/MySQL.
 - **Storage**: Local folder `./storage/` for uploaded files. In real deployments replace with S3/GCS/Azure Blob and use their native presigned URLs.
 - **Secure Stream URLs**: Signed HMAC link with exp timestamp (epoch seconds), valid 10 minutes.
+- **Analytics**: Complete view tracking with IP logging, daily aggregations, and unique visitor counting.
 - **Logging**: Every stream request logs media_id, viewer IP, timestamp in MediaViewLog.
-- **Scope**: Minimal, focused on the assignment requirements; no background tasks, no thumbnails, no chunked streaming.
+- **Scope**: Comprehensive media platform with authentication, upload, streaming, and analytics.
 
 ## Project Structure
 

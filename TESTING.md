@@ -65,6 +65,29 @@ curl -I "THE_STREAM_URL_FROM_STEP_5"
 ```
 Expected: HTTP 200 with file headers
 
+### 7. Log Media View (Task 2 - NEW)
+```bash
+curl -X POST http://127.0.0.1:8000/media/1/view \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+Expected: `{"message": "View logged successfully", "media_id": 1, "timestamp": "...", "viewer_ip": "..."}`
+
+### 8. Get Analytics (Task 2 - NEW)
+```bash
+curl -X GET http://127.0.0.1:8000/media/1/analytics \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+Expected:
+```json
+{
+  "total_views": 3,
+  "unique_ips": 1,
+  "views_per_day": {
+    "2025-08-17": 3
+  }
+}
+```
+
 ## 📊 Database & Files
 
 ### Check Database
@@ -118,6 +141,8 @@ The server logs show in the terminal where you started uvicorn.
 | POST | `/media/` | Yes | Upload media |
 | GET | `/media/{id}/stream-url` | Yes | Get signed URL |
 | GET | `/media/stream/{id}` | Signed | Stream file |
+| **POST** | **`/media/{id}/view`** | **Yes** | **Log media view (Task 2)** |
+| **GET** | **`/media/{id}/analytics`** | **Yes** | **Get view analytics (Task 2)** |
 
 ## 🔐 Security Features
 
