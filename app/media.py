@@ -37,7 +37,7 @@ def create_media(
     media = models.MediaAsset(
         title=title,
         type=models.MediaType(type),
-        file_url=str(dest.relative_to(Path.cwd()))
+        file_url=str(dest.resolve())
     )
     db.add(media)
     db.commit()
